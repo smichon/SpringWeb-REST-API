@@ -35,7 +35,8 @@ dependencies {
 	compile('io.springfox:springfox-swagger2:2.7.0')
 	compile('io.springfox:springfox-swagger-ui:2.7.0')
 	compile('org.springframework.boot:spring-boot-starter-mail:2.0.1.RELEASE')
-
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('com.google.code.gson:gson:2.8.2')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
