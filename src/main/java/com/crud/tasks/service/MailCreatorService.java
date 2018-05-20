@@ -28,13 +28,13 @@ public class MailCreatorService {
         Context context = new Context();
         context.setVariable("message", message);
         context.setVariable("preview", "Tasks: New Trello card");
-        context.setVariable("tasks_url", "http://localhost/tasks_frontend/");
+        context.setVariable("tasks_url", "https://smichon.github.io/");
         context.setVariable("button", "Visit website");
         context.setVariable("admin_config", adminConfig);
         context.setVariable("goodbye", "Thank You  for using our Application");
         context.setVariable("company", companyConfig.getCompanyName() +
                 companyConfig.getCompanyMail() + " tel.: " + companyConfig.getCompanyPhone());
-        context.setVariable("show_button", false);
+        context.setVariable("show_button", true);
         context.setVariable("is_friend", false);
         context.setVariable("application_functionality", getfunctionality());
         return templateEngine.process("mail/created-trello-card-mail", context);
@@ -44,13 +44,13 @@ public class MailCreatorService {
         Context context = new Context();
         context.setVariable("message", message);
         context.setVariable("preview", "Tasks in base");
-        context.setVariable("tasks_url", "http://localhost/tasks_frontend/");
+        context.setVariable("tasks_url", "https://smichon.github.io/");
         context.setVariable("button", "Visit website");
         context.setVariable("admin_config", adminConfig);
         context.setVariable("goodbye", "Thank You  for using our Application");
         context.setVariable("company", companyConfig.getCompanyName() +
                 companyConfig.getCompanyMail() + " tel.: " + companyConfig.getCompanyPhone());
-        context.setVariable("show_button", false);
+        context.setVariable("show_button", true);
         context.setVariable("is_friend", false);
         context.setVariable("application_functionality", getfunctionality());
         return templateEngine.process("mail/created-task-card-mail",context);
