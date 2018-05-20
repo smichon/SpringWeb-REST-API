@@ -15,23 +15,25 @@ import org.springframework.stereotype.Service;
 public class SimpleEmailService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMailMessage.class);
+    public static final int TASKS_MAIL = 1;
+    public static final int TRELLO_MAIL = 2;
 
     @Autowired
     private JavaMailSender javaMailSender;
     @Autowired
     private MailCreatorService mailCreatorService;
 
-    public void send(final Mail mail) {
+    public void send(final Mail mail, int choice) {
         LOGGER.info("Starting email preparation...");
         try {
-            javaMailSender.send(createMimeMessage(mail));
+            javaMailSender.send(createMimeMessage(mail, choice));
             LOGGER.info("Email has been sent");
         } catch (MailException e) {
             LOGGER.error("Failed to process email sending ", e.getMessage(), e);
         }
     }
 
-    private MimeMessagePreparator createMimeMessage(final Mail mail) {
+    private MimeMessagePreparator createMimeMessage(final Mail mail, int choice) {
         return mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
@@ -39,7 +41,16 @@ public class SimpleEmailService {
                 messageHelper.setCc(mail.getToCc());
             }
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+            switch (choice) {
+                case TASKS_MAIL:
+                    messageHelper.setText(mailCreatorService.buildTaskCardEmail(mail.getMessage()), true);
+                    break;
+                case TRELLO_MAIL:
+                    messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+                    break;
+                default:
+                    break;
+            }
         };
     }
 
